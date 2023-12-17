@@ -1,3 +1,4 @@
+use specta::ts::ExportConfiguration;
 use std::path::PathBuf;
 
 /// TODO
@@ -5,6 +6,7 @@ use std::path::PathBuf;
 pub struct Config {
     pub(crate) export_bindings_on_build: Option<PathBuf>,
     pub(crate) bindings_header: Option<&'static str>,
+    pub(crate) export_config: Option<ExportConfiguration>,
 }
 
 impl Config {
@@ -19,6 +21,11 @@ impl Config {
         PathBuf: From<TPath>,
     {
         self.export_bindings_on_build = Some(PathBuf::from(export_path));
+        self
+    }
+
+    pub fn export_config(mut self, export_config: ExportConfiguration) -> Self {
+        self.export_config = Some(export_config);
         self
     }
 
