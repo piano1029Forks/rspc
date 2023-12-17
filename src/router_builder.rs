@@ -349,6 +349,7 @@ where
         } = self;
 
         let export_path = config.export_bindings_on_build.clone();
+        let export_config = config.export_config.clone();
         let router = Router {
             config,
             queries,
@@ -361,7 +362,7 @@ where
         #[cfg(debug_assertions)]
         #[allow(clippy::unwrap_used)]
         if let Some(export_path) = export_path {
-            router.export_ts(export_path, config.export_config).unwrap();
+            router.export_ts(export_path, export_config).unwrap();
         }
 
         router
