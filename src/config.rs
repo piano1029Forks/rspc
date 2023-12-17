@@ -6,12 +6,16 @@ use std::path::PathBuf;
 pub struct Config {
     pub(crate) export_bindings_on_build: Option<PathBuf>,
     pub(crate) bindings_header: Option<&'static str>,
-    pub(crate) export_config: Option<ExportConfiguration>,
+    pub(crate) export_config: ExportConfiguration,
 }
 
 impl Config {
     pub fn new() -> Self {
-        Default::default()
+        Self {
+            export_bindings_on_build: None,
+            bindings_header: None,
+            export_config: ExportConfiguration::new(),
+        }
     }
 
     /// will export the bindings of the generated router to a folder every time the router is built.
